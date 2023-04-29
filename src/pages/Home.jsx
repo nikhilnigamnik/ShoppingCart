@@ -12,7 +12,10 @@ const Home = () => {
       const res = await fetch(API_URL);
       const data = await res.json();
       setPosts(data);
-    } catch (error) {}
+    } catch (error) {
+      console.log("errorrr");
+      
+    }
     setLoading(false);
   }
 
@@ -21,17 +24,19 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="w-screen flex justify-center items-center">
       {loading ? (
         <Spinner />
       ) : posts.length > 0 ? (
-        <div>
+        <div className="grid  sm:grid-cols-2 
+        md:grid-cols-3 lg:grid-cols-4 
+        max-w-6xl mx-auto space-y-10 space-x-5">
           {posts.map((post) => (
             <Product key={post.id} post={post} />
           ))}
         </div>
       ) : (
-        <div>
+        <div className="flex justify-center items-center">
           <p>Data not Found</p>
         </div>
       )}
